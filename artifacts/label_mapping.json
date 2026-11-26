@@ -1,0 +1,17 @@
+{
+  "label_to_id": {
+    "Low": 0,
+    "Medium": 1,
+    "High": 2
+  },
+  "id_to_label": {
+    "0": "Low",
+    "1": "Medium",
+    "2": "High"
+  },
+  "classes": [
+    "Low",
+    "Medium",
+    "High"
+  ]
+}

@@ -1,0 +1,165 @@
+{
+  "dataset_rows": 68,
+  "evaluation_protocol": "Nested CV: outer RepeatedStratifiedKFold(n_splits=5, n_repeats=10, random_state=42), inner StratifiedKFold(n_splits=3) GridSearchCV(scoring='f1_macro')",
+  "chosen_model": "random_forest",
+  "chosen_model_name": "Random Forest",
+  "selection_reason": "Highest nested CV macro-F1 (0.691 +/- 0.112). Note: within 1 SD of XGBoost (0.599 +/- 0.156), and Random Forest is tree-based so it pairs directly with SHAP TreeExplainer.",
+  "final_best_params": {
+    "clf__max_depth": 3,
+    "clf__min_samples_leaf": 2,
+    "clf__n_estimators": 150
+  },
+  "permutation_test": {
+    "observed_macro_f1": 0.665058645058645,
+    "perm_mean_macro_f1": 0.3040473103894157,
+    "perm_std_macro_f1": 0.065752580962366,
+    "p_value": 0.009900990099009901,
+    "n_permutations": 100
+  },
+  "models": [
+    {
+      "key": "dummy",
+      "name": "Dummy (Majority)",
+      "cv_accuracy_mean": 0.44175824175824163,
+      "cv_accuracy_std": 0.01615048182054845,
+      "cv_macro_f1_mean": 0.20421052631578945,
+      "cv_macro_f1_std": 0.005156820511122483,
+      "train_macro_f1_mean": 0.20408958130477117,
+      "train_cv_gap": -0.00012094501101828081,
+      "roc_auc_ovr_mean": 0.5,
+      "roc_auc_ovr_std": 0.0,
+      "per_class_f1": {
+        "Low": 0.0,
+        "Medium": 0.6122448979591837,
+        "High": 0.0
+      },
+      "pooled_confusion_matrix": [
+        [
+          0,
+          110,
+          0
+        ],
+        [
+          0,
+          300,
+          0
+        ],
+        [
+          0,
+          270,
+          0
+        ]
+      ]
+    },
+    {
+      "key": "logistic_regression",
+      "name": "Logistic Regression",
+      "cv_accuracy_mean": 0.5919780219780219,
+      "cv_accuracy_std": 0.09862482780630694,
+      "cv_macro_f1_mean": 0.5673414733414733,
+      "cv_macro_f1_std": 0.12301200938265718,
+      "train_macro_f1_mean": 0.9159721448833139,
+      "train_cv_gap": 0.3486306715418406,
+      "roc_auc_ovr_mean": 0.7627747715247716,
+      "roc_auc_ovr_std": 0.08247799299689296,
+      "per_class_f1": {
+        "Low": 0.5121951219512195,
+        "Medium": 0.5582191780821918,
+        "High": 0.6679245283018868
+      },
+      "pooled_confusion_matrix": [
+        [
+          63,
+          40,
+          7
+        ],
+        [
+          61,
+          163,
+          76
+        ],
+        [
+          12,
+          81,
+          177
+        ]
+      ]
+    },
+    {
+      "key": "random_forest",
+      "name": "Random Forest",
+      "cv_accuracy_mean": 0.7168131868131868,
+      "cv_accuracy_std": 0.10309900417207138,
+      "cv_macro_f1_mean": 0.6910948963890141,
+      "cv_macro_f1_std": 0.11186546391193784,
+      "train_macro_f1_mean": 0.9218233118896519,
+      "train_cv_gap": 0.23072841550063783,
+      "roc_auc_ovr_mean": 0.871138528138528,
+      "roc_auc_ovr_std": 0.06187334118615694,
+      "per_class_f1": {
+        "Low": 0.6166666666666667,
+        "Medium": 0.72,
+        "High": 0.7636363636363637
+      },
+      "pooled_confusion_matrix": [
+        [
+          74,
+          30,
+          6
+        ],
+        [
+          45,
+          225,
+          30
+        ],
+        [
+          11,
+          70,
+          189
+        ]
+      ]
+    },
+    {
+      "key": "xgboost",
+      "name": "XGBoost",
+      "cv_accuracy_mean": 0.646043956043956,
+      "cv_accuracy_std": 0.1303673295849583,
+      "cv_macro_f1_mean": 0.5992826389296977,
+      "cv_macro_f1_std": 0.15556523293097715,
+      "train_macro_f1_mean": 0.9883062043290611,
+      "train_cv_gap": 0.38902356539936345,
+      "roc_auc_ovr_mean": 0.805127344877345,
+      "roc_auc_ovr_std": 0.08587536237264147,
+      "per_class_f1": {
+        "Low": 0.4928909952606635,
+        "Medium": 0.6492659053833605,
+        "High": 0.7052238805970149
+      },
+      "pooled_confusion_matrix": [
+        [
+          52,
+          44,
+          14
+        ],
+        [
+          38,
+          199,
+          63
+        ],
+        [
+          11,
+          70,
+          189
+        ]
+      ]
+    }
+  ],
+  "package_versions": {
+    "python": "3.12.10",
+    "scikit-learn": "1.9.1",
+    "xgboost": "3.4.1",
+    "pandas": "3.1.1",
+    "numpy": "2.5.5",
+    "joblib": "1.6.0"
+  }
+}
