@@ -6,14 +6,15 @@ The agent must read this file first in every session and update it at the end of
 Explainable and Personalized Workplace Stress Prediction System (office-going adults, 22-40). Team of 5, B.Tech IT final year, Techno Main Salt Lake. Supervisor: Ms. Anandita Saha.
 
 ## Current status
-- Current phase: Phase 2 complete (awaiting approval for Phase 3)
-- Last completed phase: Phase 2 - Model training and comparison
-- File currently being worked on: none
+- Current phase: Phase 3 Part A complete (awaiting approval for Phase 3 Part B: charts, sanity-check comparison, and pytest tests)
+- Last completed phase: Phase 3 Part A - Core SHAP explainability (`ml/src/explain.py`)
+- File currently being worked on: `ml/src/explain.py`
 
 ## Completed
 - Phase 0: Created folder structure, Python `venv/`, pinned `requirements.txt` from `pip freeze`, `shared/features.py`, and `ml/src/load_data.py`. Cleaned and validated `data/raw/survey_responses.csv` into `data/processed/clean.csv`.
 - Phase 1: Created and executed `ml/notebooks/01_eda.ipynb` on `data/processed/clean.csv` and saved 8 labelled figures to `artifacts/figures/`.
 - Phase 2: Created and ran `ml/src/train.py` and `ml/notebooks/02_model_comparison.ipynb` with nested CV (outer 5x10 RepeatedStratifiedKFold, inner 3-fold GridSearchCV). Saved `artifacts/stress_pipeline.joblib`, `artifacts/label_mapping.json`, `artifacts/metrics.json`, and 2 figures (`09_model_comparison.png`, `10_best_model_confusion_matrix.png`). Verified fresh-process `joblib.load` on raw string input.
+- Phase 3 (Part A): Updated `docs/Architecture.md` section 6 and created `ml/src/explain.py` with cached `TreeExplainer`, one-hot aggregation, `stress_push = SHAP(High) - SHAP(Low)` direction logic, input validation, and `explain_one()`. Verified SHAP additivity (max |error| = `6.66e-16` across 10 rows x 3 classes) and tested 3 real rows (Low, Medium, High).
 
 ## Phase 1 EDA findings (68-row sample; exploratory only, not proof)
 1. Class imbalance is clear: Medium (30, 44.1%) and High (27, 39.7%) make up most of the sample, while Low is only 11 (16.2%); demographics skew young (22-28: 46/68), male (50/68), and single (48/68).
@@ -28,7 +29,7 @@ Explainable and Personalized Workplace Stress Prediction System (office-going ad
 - Models: DummyClassifier, Logistic Regression, Random Forest, and XGBoost; best by CV macro-F1.
 - Imbalance handling: `class_weight="balanced"` / sample weights (no SMOTE).
 - Single sklearn Pipeline saved with joblib.
-- SHAP aggregated back to original features.
+- SHAP aggregated back to original features; per-prediction direction uses `stress_push = SHAP(High) - SHAP(Low)` (updated in `docs/Architecture.md` section 6).
 - What-If uses stress_index = 100 * (0.5*P(Medium) + 1.0*P(High)).
 - No login, no diagnosis claims.
 

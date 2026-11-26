@@ -101,8 +101,8 @@ Each feature in shared/features.py also carries: display label, question text, a
 ## 6. Explainability design
 - Use shap.TreeExplainer on the classifier, applied to the transformed features.
 - Aggregate SHAP values of one-hot columns back to their original feature by summing, so the user sees "gender" or "sleep_duration", not "gender_Male".
-- Per prediction: explain the predicted class; return top 5 factors sorted by absolute impact with direction ("increases stress" / "reduces stress") and the user's answer for that feature.
-- Global: SHAP summary bar plot saved to artifacts/figures/.
+- Per prediction: compute `stress_push = SHAP_value_for_High - SHAP_value_for_Low` for each original feature (positive = pushes toward higher stress, negative = pushes toward lower stress). Return top 5 factors sorted by `|stress_push|` with `feature`, `label`, user `value`, `impact`, and `direction` (`"increases"` / `"reduces"`).
+- Global: SHAP summary bar plot of mean `|stress_push|` saved to artifacts/figures/.
 
 ## 7. API contract
 GET  /health -> {"status": "ok"}
